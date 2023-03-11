@@ -9,6 +9,7 @@ import { publicProvider } from "wagmi/providers/public";
 
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { useEffect, useState } from "react";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [mainnet, goerli, optimism, avalanche],
@@ -36,9 +37,18 @@ const client = createClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    if (!ready) {
+      setReady(true);
+    }
+  }, [ready]);
+
   return (
-    <WagmiConfig client={client}>
-      <Component {...pageProps} />
-    </WagmiConfig>
+    ready && (
+      <WagmiConfig client={client}>
+        <Component {...pageProps} />
+      </WagmiConfig>
+    )
   );
 }
