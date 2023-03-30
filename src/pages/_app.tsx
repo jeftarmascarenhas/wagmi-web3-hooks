@@ -42,7 +42,7 @@ const client = createClient({
         appName: "Bush Associates",
       },
     }),
-    BinanceSmallConnector,
+    new BinanceSmallConnector({ chains }),
   ],
   provider,
   webSocketProvider,
