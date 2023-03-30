@@ -2,17 +2,25 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 
 import { WagmiConfig, createClient, configureChains } from "wagmi";
-import { avalanche, goerli, mainnet, optimism } from "wagmi/chains";
+import {
+  avalanche,
+  goerli,
+  mainnet,
+  optimism,
+  bsc,
+  bscTestnet,
+} from "wagmi/chains";
+import { useEffect, useState } from "react";
 
 // import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from "wagmi/providers/public";
 
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
-import { useEffect, useState } from "react";
+import { BinanceWalletConnector } from "@/libs/wagmi/connnectors/binanceWallet";
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [mainnet, goerli, optimism, avalanche],
+  [mainnet, goerli, optimism, avalanche, bsc, bscTestnet],
   [publicProvider()]
 );
 
@@ -30,6 +38,9 @@ const client = createClient({
       options: {
         appName: "Bush Associates",
       },
+    }),
+    new BinanceWalletConnector({
+      chains,
     }),
   ],
   provider,
