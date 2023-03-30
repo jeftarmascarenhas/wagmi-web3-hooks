@@ -17,7 +17,10 @@ import { publicProvider } from "wagmi/providers/public";
 
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
-import { BinanceWalletConnector } from "@/libs/wagmi/connnectors/binanceWallet";
+import {
+  BinanceWalletConnector,
+  BinanceSmallConnector,
+} from "@/libs/wagmi/connnectors/binanceWallet";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [mainnet, goerli, optimism, avalanche, bsc, bscTestnet],
@@ -39,9 +42,7 @@ const client = createClient({
         appName: "Bush Associates",
       },
     }),
-    new BinanceWalletConnector({
-      chains,
-    }),
+    BinanceSmallConnector,
   ],
   provider,
   webSocketProvider,

@@ -1,21 +1,10 @@
 import {
-  configureChains,
   ConnectorNotFoundError,
   UserRejectedRequestError,
   RpcError,
   ResourceUnavailableError,
   SwitchChainNotSupportedError,
 } from "wagmi";
-import {
-  avalanche,
-  goerli,
-  mainnet,
-  optimism,
-  bsc,
-  bscTestnet,
-} from "wagmi/chains";
-
-import { publicProvider } from "wagmi/providers/public";
 
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { Chain, Ethereum } from "@wagmi/core";
@@ -141,6 +130,18 @@ export class BinanceWalletConnector extends InjectedConnector {
         }
       }
     }
+
     throw new SwitchChainNotSupportedError({ connector: this });
   }
 }
+
+export const BinanceSmallConnector = new InjectedConnector({
+  options: {
+    name: "Binance",
+    shimDisconnect: true,
+    shimChainChangedDisconnect: false,
+    getProvider: () => {
+      return typeof window !== "undefined" ? window.BinanceChain : undefined;
+    },
+  },
+});
