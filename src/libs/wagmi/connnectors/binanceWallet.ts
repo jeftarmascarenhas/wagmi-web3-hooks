@@ -144,8 +144,3 @@ export class BinanceWalletConnector extends InjectedConnector {
     throw new SwitchChainNotSupportedError({ connector: this });
   }
 }
-
-const { chains, provider, webSocketProvider } = configureChains(
-  [mainnet, goerli, optimism, avalanche, bsc, bscTestnet],
-  [publicProvider()]
-);
