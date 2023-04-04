@@ -135,19 +135,6 @@ export class BinanceWalletConnector extends InjectedConnector {
   }
 }
 
-// export const BinanceSmallConnector = (chains: Chain[] | undefined) =>
-//   new InjectedConnector({
-//     chains,
-//     options: {
-//       name: "Binance",
-//       shimDisconnect: true,
-//       shimChainChangedDisconnect: false,
-//       getProvider: () => {
-//         return typeof window !== "undefined" ? window.BinanceChain : undefined;
-//       },
-//     },
-//   });
-
 export class BinanceSmallConnector extends InjectedConnector {
   constructor({ chains }: { chains: Chain[] | undefined }) {
     const options = {
