@@ -39,7 +39,7 @@ const client = createClient({
     new CoinbaseWalletConnector({
       chains,
       options: {
-        appName: "Bush Associates",
+        appName: "NFT Choose - Wagmi",
       },
     }),
     new BinanceSmallConnector({ chains }),
